@@ -87,4 +87,9 @@ public class Carta extends JLabel {
         this.setIcon(new ImageIcon(getClass().getResource("/img/cartas/tras.png")));
     }
 
+    public void desabilita(){
+        setVisible(false);
+        setEnabled(false);
+    }
+
 }

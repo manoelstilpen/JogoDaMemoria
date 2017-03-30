@@ -169,7 +169,6 @@ public class ControlGame{
             // aguarda thread que vira a carta terminar a execucao
             try {
                 t1.join();
-                // aguarda um tempo
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -184,7 +183,7 @@ public class ControlGame{
                 audioAcerto.start();
 
                 for(Carta carta : cartasAtivas){
-                    carta.setVisible(false);
+                    carta.desabilita();
                 }
                 nCartas--;
 

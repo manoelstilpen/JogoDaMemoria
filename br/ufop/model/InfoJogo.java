@@ -2,6 +2,10 @@ package br.ufop.model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 /**
  * Created by manoelstilpen on 26/03/17.
@@ -10,13 +14,16 @@ import java.util.ArrayList;
 public class InfoJogo implements Serializable{
 
     private static final long serialVersionUID = 5830814365875949087L;
-    private static final String nomeArquivo = "historico.txt";
+    private static final String nomeArquivo = "arquivos/historico.txt";
 
     private int nJogadas;
     private int nSegundos;
     private int nMinutos;
 
     private Constantes nivel;
+
+    private Date data; // usado para armazenar a data e hora do jogo
+    private DateFormat dateFormat;
 
     private String nome;
 
@@ -26,6 +33,9 @@ public class InfoJogo implements Serializable{
         this.nJogadas = 0;
         this.nSegundos = 0;
         this.nMinutos = 0;
+
+        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        this.data = new Date();
     }
 
     /**
@@ -126,7 +136,7 @@ public class InfoJogo implements Serializable{
         ObjectInputStream input = null;
 
         int nObjects = getNumObjetosNoArquivo();
-
+        
         if(nObjects != 0) {
             try {
                 input = new ObjectInputStream(new FileInputStream(nomeArquivo));
@@ -228,6 +238,10 @@ public class InfoJogo implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getData(){
+        return dateFormat.format(this.data);
     }
 
 }

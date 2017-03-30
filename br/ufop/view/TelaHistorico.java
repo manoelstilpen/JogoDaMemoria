@@ -17,29 +17,34 @@ public class TelaHistorico extends JFrame implements Serializable {
 
     public TelaHistorico(){
 
-        String[] columnNames = {"Nome",
+        String[] columnNames = {
+                "Data",
+                "Nome",
                 "Jogadas",
                 "Tempo",
                 "Nivel"};
 
         ArrayList<InfoJogo> array = InfoJogo.carregaArquivo();
 
-        Object[][] data = new Object[array.size()][4];
+        Object[][] data = new Object[array.size()][5];
 
         int i=0;
         for(InfoJogo c : array){
-            data[i][0] = c.getNome();
-            data[i][1] = c.getnJogadas();
-            data[i][2] = c.getTempo();
-            data[i][3] = c.getNivel();
+            data[i][0] = c.getData();
+            data[i][1] = c.getNome();
+            data[i][2] = c.getnJogadas();
+            data[i][3] = c.getTempo();
+            data[i][4] = c.getNivel();
             i++;
         }
 
         JTable table = new JTable(data, columnNames);
+        table.setEnabled(false);
+        table.getColumnModel().getColumn(0).setPreferredWidth(100);
 
         setTitle("Historico de Jogo");
         setLayout(new BorderLayout());
-        setSize(400,400);
+        setSize(600,400);
         setLocationRelativeTo(null);
 
         add(table.getTableHeader(), BorderLayout.PAGE_START);
