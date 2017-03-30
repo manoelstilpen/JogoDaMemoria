@@ -29,8 +29,8 @@ public class ControlInicio {
     }
 
     public Constantes run(){
-        initAudio();
         telaInicial.setControl(this);
+        initAudio();
         executaTelaInicial();
 
         return Constantes.JOGO;
@@ -42,6 +42,7 @@ public class ControlInicio {
 
             audio = AudioSystem.getClip();
             ais = AudioSystem.getAudioInputStream(new File(caminhoEntradaSom));
+            audio.open(ais);
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -62,7 +63,7 @@ public class ControlInicio {
                 boolean sair = false;
                    
                 audio.setFramePosition(0);
-                audio.start();
+                audio.loop(Clip.LOOP_CONTINUOUSLY);
 
                 while (!sair) {
                     // aguarda ate a tela inicial for fechada
