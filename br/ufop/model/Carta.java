@@ -20,6 +20,8 @@ public class Carta extends JLabel {
 
     private String caminho_imagem;
 
+    private boolean habilitado = true;
+
     public Carta(){
         esconder();
     }
@@ -73,6 +75,10 @@ public class Carta extends JLabel {
         this.caminho_imagem = "/img/cartas/" + Integer.toString(code) + ".png";
     }
 
+    public boolean isHabilitado(){
+        return this.habilitado;
+    }
+
     /**
      * Muda o icone, exibindo na tela o naipe
      */
@@ -90,6 +96,7 @@ public class Carta extends JLabel {
     public void desabilita(){
         setVisible(false);
         setEnabled(false);
+        this.habilitado = false;
     }
 
 }

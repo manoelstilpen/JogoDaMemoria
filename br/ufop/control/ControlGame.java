@@ -160,7 +160,7 @@ public class ControlGame{
         // enquanto estiver realizando processamento, o clique em outras cartas é desabilitado
         cliqueHabilitado = false;
 
-        if(nCartasAtivas == 1 && !cartasAtivas.get(0).equals(c)){
+        if(nCartasAtivas == 1 && !cartasAtivas.get(0).equals(c) && c.isHabilitado()){
 
             cartasAtivas.add(1, c);
             Thread t1 = new Thread(() -> { cartasAtivas.get(1).mostrar();});

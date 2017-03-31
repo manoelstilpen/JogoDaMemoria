@@ -3,6 +3,10 @@ package br.ufop.model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
+
+import java.util.Comparator;
+import java.util.Collections;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -11,7 +15,7 @@ import java.text.SimpleDateFormat;
  * Created by manoelstilpen on 26/03/17.
  * @author manoelstilpen
  */
-public class InfoJogo implements Serializable{
+public class InfoJogo implements Serializable, Comparable<InfoJogo>{
 
     private static final long serialVersionUID = 5830814365875949087L;
     private static final String nomeArquivo = "arquivos/historico.txt";
@@ -23,7 +27,6 @@ public class InfoJogo implements Serializable{
     private Constantes nivel;
 
     private Date data; // usado para armazenar a data e hora do jogo
-    private DateFormat dateFormat;
 
     private String nome;
 
@@ -34,8 +37,16 @@ public class InfoJogo implements Serializable{
         this.nSegundos = 0;
         this.nMinutos = 0;
 
-        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         this.data = new Date();
+    }
+
+    /**
+     * Sobrescrevendo funcao da interface Comparable
+     */
+    @Override
+    public int compareTo(InfoJogo c1) {
+        //return this.nivel.getValor() - c1.getNivel().getValor();
+        return this.getnJogadas() - c1.getnJogadas();
     }
 
     /**
@@ -107,8 +118,21 @@ public class InfoJogo implements Serializable{
 
         try {
 
+            // leitura dos objetos que ja foram salvos
             if(nObjects != 0)
                 array = carregaArquivo();
+
+            // insere o objeto atual no array
+            array.add(this);
+
+            Collections.sort (array, new Comparator() {
+                @Override
+                public int compare(Object o1, Object o2) {
+                    InfoJogo p1 = (InfoJogo) o1;
+                    InfoJogo p2 = (InfoJogo) o2;
+                    return p1.compareTo(p2);
+                }
+            });
 
             output = new ObjectOutputStream(new FileOutputStream(nomeArquivo));
             output.writeInt(nObjects+1);
@@ -116,9 +140,6 @@ public class InfoJogo implements Serializable{
             // salva os objetos
             for(InfoJogo info : array)
                 output.writeObject(info);
-
-            // salva o objeto atual
-            output.writeObject(this);
 
             output.close();
 
@@ -241,6 +262,7 @@ public class InfoJogo implements Serializable{
     }
 
     public String getData(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return dateFormat.format(this.data);
     }
 
