@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 public class InfoJogo implements Serializable, Comparable<InfoJogo>{
 
     private static final long serialVersionUID = 5830814365875949087L;
-    private static final String nomeArquivo = "arquivos/historico.txt";
+    private static final String nomeArquivo = "arquivos/historico";
 
     private int nJogadas;
     private int nSegundos;
