@@ -37,7 +37,7 @@ public class ControlGame{
 
     private ArrayList<Carta> cartasAtivas = new ArrayList<Carta>(2);
 
-    private TelaJogo telaJogo = new TelaJogo();
+    private TelaJogo telaJogo;
 
     private AudioInputStream aisErro;
     private AudioInputStream aisAcerto;
@@ -53,21 +53,6 @@ public class ControlGame{
     public ControlGame(){
 
     }
-
-    /**
-     *
-     * @param name nome do jogador
-     * @param nivel nivel de jogo
-     */
-    public ControlGame(String name, Constantes nivel){
-        setPlayerName(name);
-        setNivel(nivel);
-    }
-
-    /**
-     * Funcao que inicia o jogo, envia os parametros necessarios para a tela.
-     * Inicia uma thread que mantem um loop ate que a tela seja fechada.
-     */
 
     public void initAudio(){
         try {
@@ -100,12 +85,16 @@ public class ControlGame{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Funcao que inicia o jogo, envia os parametros necessarios para a tela.
+     * Inicia uma thread que mantem um loop ate que a tela seja fechada.
+     */
     public Constantes run(){
         initAudio();
 
         infoJogo = new InfoJogo(nomeJogador, nivel);
-
+        telaJogo = new TelaJogo();
+        
         telaJogo.setNivel(nivel);
         telaJogo.setnCartas(nCartas);
         telaJogo.setControl(this);

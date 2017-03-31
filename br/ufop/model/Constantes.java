@@ -32,9 +32,7 @@ public enum Constantes{
         public int getValor(){ return valor;}
     },
 
-    MENU,
-    JOGO,
-    SAIR;
+    MENU, JOGO, SAIR;
 
     public final static int nChances = 5;
     public int getValor(){ return 0; }
