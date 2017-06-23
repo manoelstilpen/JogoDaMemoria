@@ -1,10 +1,10 @@
-## Jogo da Memoria
-Jogo da Memoria implementado em Java utilizando a biblioteca Swing
+## Memory Game
+Memory Game with Java-Swing implementation.
 
-Para compilar: ```make```
+Compiling: ```make```
 
-Executar: ```make run```
+Executing: ```make run```
 
-## Tela de Jogo
+## Screen
 ![Imgur](http://i.imgur.com/WrugLxZ.png) 
 
